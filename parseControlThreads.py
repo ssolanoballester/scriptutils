@@ -16,11 +16,12 @@ import matplotlib.dates as mdates
 from matplotlib.dates import  DateFormatter
 
 
-date, threadCount, idleThread = np.loadtxt('data/tratado_20180419_control_threads_EFOWAT01',
+date, threadCount, idleThread = np.loadtxt('data/tratado_20180419_control_threads_EFOWAT02',
         unpack=True,
         delimiter=',',
         #converters={0: mdates.strpdate2num('%Y%m%d%H%M%S')}
-        converters={0: mdates.strpdate2num('%d-%m-%Y:%H:%M:%S')}
+        #converters={0: mdates.strpdate2num('%d-%m-%Y:%H:%M:%S')}
+        converters={0: mdates.strpdate2num('%d-%m-%Y:%H:%M')}
         )
 fig = plt.figure(figsize=(10,7))
 ax1 = plt.subplot2grid((40, 40), (0, 0), rowspan=40, colspan=40)
@@ -29,7 +30,7 @@ ax1.plot(date, threadCount)
 #ax1.plot(date, ask)
 ax1.plot(date, idleThread)
 plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
-ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M:%S'))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
 
 for label in ax1.xaxis.get_ticklabels():
     label.set_rotation(45)
@@ -42,7 +43,7 @@ plt.subplots_adjust(bottom=.23)
 plt.xlabel('Date')
 #plt.ylabel('Current Threads                                                          Idle Threads')
 plt.ylabel('Current Threads')
-plt.title('EFOWAT01 Threads')
+plt.title('EFOWAT02 Threads')
 plt.legend()
 plt.grid(True)
 plt.show()
